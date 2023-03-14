@@ -1,25 +1,30 @@
 ## 1. Describe the Problem
 
 As a user
-So that I can manage my time
-I want to see an estimate of reading time for a text, assuming that I can read 200 words a minute.
-
+So that I can improve my grammar
+I want to verify that a text starts with a capital letter and ends with a suitable sentence-ending punctuation mark.
 
 ## 2. Design the Method Signature
 
 _Include the name of the method, its parameters, return value, and side effects._
 
-# `estimate time` takes a string of words and returns how long it takes to read them
-time_to_read = estimate_time(text)
+# `verify_punc` takes a string of words and returns true if its acceptable grammar
+is_acceptable = verify_punc(text)
 
 text: a string (e.g. "hello WORLD")
-time_to_read: integer representing number of seconds
-
-
+is_acceptable = boolean (e.g. true)
 
 ## 3. Create Examples as Tests
 
 _Make a list of examples of what the method will take and return._
+
+verify_punc("Hello world.") => true
+verify_punc("hello world.") => false
+verify_punc("Hello world") => false
+verify_punc("Hello world!") => true
+verify_punc("Hello world???") => true
+verify_punc("") => throw error ("Nothing to verify")
+
 
 ## 4. Implement the Behaviour
 
