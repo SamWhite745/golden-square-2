@@ -2,7 +2,7 @@ class DiaryEntry
   def initialize(title, contents) # title, contents are strings
     @title = title
     @contents = contents
-    @left_to_read = contents
+    @left_to_read = contents.split(" ")
   end
 
   def title
@@ -24,22 +24,20 @@ class DiaryEntry
 
   def reading_chunk(wpm, minutes)
     fail "reading speed needs to be above 0" if wpm <= 0
-    words_can_read = wpm * minutes #4
+    words_can_read = wpm * minutes
 
-    if count_remaining_words > words_can_read 
-      words_read = @left_to_read.split(" ").first(words_can_read).join(" ") # one two three four
-      @left_to_read = @left_to_read.split(" ").drop(words_can_read).join(" ")
+    if @left_to_read.count > words_can_read # More words than time to read
+      words_read = @left_to_read.first(words_can_read).join(" ")
+      @left_to_read = @left_to_read.drop(words_can_read)
       return words_read
-    else
-      words_read = @left_to_read
-      @left_to_read = @contents
+    else # Enough time to read all words
+      words_read = @left_to_read.join(" ")
+      @left_to_read = @contents.split(" ")
       return words_read
     end
+
   end
 
-  private
 
-  def count_remaining_words
-    return @left_to_read.split(" ").count
-  end
+
 end
